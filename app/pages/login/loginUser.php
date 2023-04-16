@@ -122,15 +122,15 @@
 
     <div style="display:flex; justify-content:center;">
         <div style="width: 400px; padding-top: 1rem;">
-            <form class="form-group">
+            <form class="form-group" action="../../../adm/validacoes/validarLogin/login.php" method="post" enctype="multipart/form-data">
                 <label for="username" class="form-label">Nome de usuário:</label>
-                <input type="text" id="username" name="username" class="form-control"><br>
+                <input type="text" id="username" name="txtnome" class="form-control"><br>
 
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" id="email" name="email" class="form-control"><br>
+                <input type="email" id="email" name="txtemail" class="form-control"><br>
 
                 <label for="password" class="form-label">Senha:</label>
-                <input type="password" id="password" name="password" class="form-control"><br>
+                <input type="password" id="password" name="txtsenha" class="form-control"><br>
 
                 <p class="mt-3" style="text-align: center; margin-top:0 !important;">Esqueceu a sua senha? <a href="pagina_de_cadastro.html" style="color: blue;">Recuperar senha</a>.</p>
 

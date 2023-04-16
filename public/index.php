@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+  require '../adm/config/conexao.php';
+  require '../adm/manipulacoes/manipularDadosUser/consultaDadosUser.php';
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -45,6 +52,7 @@
         </div>
         <div class="col-lg-6 text-center text-lg-right">
           <div class="d-inline-flex align-items-center">
+            <?php if(!isset($_SESSION['ID'])) { ?>
             <div class="btn-group">
               <button
                 type="button"
@@ -62,6 +70,23 @@
                 </a>
               </div>
             </div>
+            <?php } else { ?>
+              <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-sm btn-light dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                <?php echo $exibeDadosUserLogado['nome'];?>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a href="../adm/validacoes/validarLogin/sair.php">
+                  <button class="dropdown-item" type="button">Sair</button>
+                </a>
+              </div>
+            </div>
+
+                <?php } ?>
 
             <div class="btn-group">
               <button
