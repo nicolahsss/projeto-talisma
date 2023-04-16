@@ -54,8 +54,12 @@
                 My Account
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">Sign in</button>
-                <button class="dropdown-item" type="button">Sign up</button>
+                <a href="../app/pages/login/loginUser.php">
+                  <button class="dropdown-item" type="button">Sign in</button>
+                </a>
+                <a href="../app/pages/cadastroUser/cadastroUser.php">
+                  <button class="dropdown-item" type="button">Sign up</button>
+                </a>
               </div>
             </div>
 
