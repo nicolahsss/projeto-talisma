@@ -80,6 +80,9 @@ session_start();
                 <?php echo $exibeDadosUserLogado['nome'];?>
               </button>
               <div class="dropdown-menu dropdown-menu-right">
+                <a href="../app/pages/perfil/perfilUsuario.php">
+                  <button class="dropdown-item" type="button">Minha conta</button>
+                </a>
                 <a href="../adm/validacoes/validarLogin/sair.php">
                   <button class="dropdown-item" type="button">Sair</button>
                 </a>
