@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Avaliações de Produtos</h1>
+		<h1>Editar Avaliações</h1>
 		<!-- Adicione o campo de busca -->
 		<div class="form-group">
 			<label for="busca">Busca:</label>
