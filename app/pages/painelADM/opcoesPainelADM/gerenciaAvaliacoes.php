@@ -59,7 +59,7 @@
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaAvaliacoes/editarAvaliacoes">Editar Avaliações</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaAvaliacoes/deletarAvaliacoes">Deletar Avaliações</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaAvaliacoes/criarAvaliacoes">Criar Avaliação</a></li>
-                <li><a href="#" data-ir="">Voltar</a></li>
+                <li><a href="../../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
         <div class="content" id="exibir-conteudo">
