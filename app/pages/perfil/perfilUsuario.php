@@ -92,10 +92,10 @@ session_start();
               id="navbarCollapse"
             >
               <div class="navbar-nav mr-auto py-0">
-                <a href="../public/index.php" class="nav-item nav-link" style="padding: 20px 10px;color: #F5F5F5;outline: none;">Home</a>
-                <a href="../app/pages/produtos/shop.php" class="nav-item nav-link" style="padding: 20px 10px;color: #F5F5F5;outline: none;">Shop</a>
-                <a href="../app/pages/detalhes/detail.php" class="nav-item nav-link" style="padding: 20px 10px;color: #F5F5F5;outline: none;">Shop Detail</a>
-                <a href="../app/pages/contato/contact.php" class="nav-item nav-link" style="padding: 20px 10px;color: #F5F5F5;outline: none;">Contact</a>
+                <a href="../../../public/index.php" class="nav-item nav-link" style="padding: 20px 10px;color: #F5F5F5;outline: none;">Home</a>
+                <a href="../../../app/pages/produtos/shop.php" class="nav-item nav-link" style="padding: 20px 10px;color: #F5F5F5;outline: none;">Shop</a>
+                <a href="../../../app/pages/detalhes/detail.php" class="nav-item nav-link" style="padding: 20px 10px;color: #F5F5F5;outline: none;">Shop Detail</a>
+                <a href="../../../app/pages/contato/contact.php" class="nav-item nav-link" style="padding: 20px 10px;color: #F5F5F5;outline: none;">Contact</a>
               </div>
               <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                 <a href="" class="btn px-0">
