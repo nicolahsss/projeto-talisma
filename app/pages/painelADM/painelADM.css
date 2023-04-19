@@ -1,0 +1,65 @@
+.container-menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.menu-sidebar {
+  flex: 0 0 200px;
+  height: 100vh;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.content {
+  flex: 1;
+
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.menu-sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-sidebar li {
+  margin-bottom: 10px;
+}
+
+.menu-sidebar a {
+  display: block;
+  padding: 5px 10px;
+  color: #333;
+  text-decoration: none;
+  padding-left: 20px;
+}
+
+.menu-sidebar a:hover {
+  background-color: #ddd;
+}
+
+.h5Perfil {
+  width: 100%;
+  padding: 20px 0 10px 20px;
+  border-bottom: 1px solid #333;
+}
+
+.perfilImage {
+  width: 50px;
+  height: 50px;
+  margin: 0 2%;
+  border-radius: 50%;
+}
+
+.imgPerfil {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#pagina {
+  max-height: 625px !important; /* Definir a altura máxima da div */
+  overflow: auto; /* Adicionar barra de rolagem quando o conteúdo exceder a altura máxima */
+}
