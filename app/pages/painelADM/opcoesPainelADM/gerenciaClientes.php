@@ -59,7 +59,7 @@
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaClientes/deletarClientes">Deletar Clientes</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaClientes/editarClientes">Editar Clientes</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaClientes/listarClientes">Listar Clientes</a></li>
-                <li><a href="#" data-ir="">Voltar</a></li>
+                <li><a href="../../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
         <div class="content" id="exibir-conteudo">
