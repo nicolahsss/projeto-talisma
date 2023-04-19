@@ -77,8 +77,11 @@ session_start();
                 class="btn btn-sm btn-light dropdown-toggle"
                 data-toggle="dropdown"
               >
-                <?php echo $exibeDadosUserLogado['nome'];?>
+                <?php 
+                echo $exibeDadosUserLogado['nome']; 
+                ?>
               </button>
+              <?php if($exibeDadosUserLogado['tipo'] === 'COMUM') { ?>
               <div class="dropdown-menu dropdown-menu-right">
                 <a href="../app/pages/perfil/perfilUsuario.php">
                   <button class="dropdown-item" type="button">Minha conta</button>
@@ -87,7 +90,21 @@ session_start();
                   <button class="dropdown-item" type="button">Sair</button>
                 </a>
               </div>
+              <?php } else { ?>
+                <div class="dropdown-menu dropdown-menu-right">
+                <a href="../app/pages/painelADM/painelADM.php">
+                  <button class="dropdown-item" type="button">Painel ADM</button>
+                </a>
+                <a href="../app/pages/perfil/perfilUsuario.php">
+                  <button class="dropdown-item" type="button">Minha conta</button>
+                </a>
+                <a href="../adm/validacoes/validarLogin/sair.php">
+                  <button class="dropdown-item" type="button">Sair</button>
+                </a>
+              </div>
+              <?php } ?>
             </div>
+
 
                 <?php } ?>
 
