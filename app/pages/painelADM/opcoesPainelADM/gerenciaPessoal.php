@@ -59,10 +59,10 @@
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPessoal/deletarPessoal">Deletar Funcionário</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPessoal/editarPessoal">Editar Funcionário</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPessoal/listarPessoal">Listar Funcionários</a></li>
-                <li><a href="../../../../public/index.php">Voltar</a></li>
+                <li><a href="../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
-        <div class="content" id="exibir-conteudo">
+        <div class="container content" id="exibir-conteudo">
 
         </div>
         <div id="notification" class="notification"></div>

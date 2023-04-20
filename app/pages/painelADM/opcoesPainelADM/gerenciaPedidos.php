@@ -59,7 +59,7 @@
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPedidos/despacharPedidos">Para Despacho</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPedidos/atualizaPedidos">Atualizar Pedidos</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPedidos/pedidosEntregues">Pedidos Entregues</a></li>
-                <li><a href="../../../../public/index.php">Voltar</a></li>
+                <li><a href="../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
         <div class="content" id="exibir-conteudo">

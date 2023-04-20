@@ -54,10 +54,10 @@
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaCategorias/deletarCategorias">Deletar Categorias</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaCategorias/editarCategorias">Editar Categorias</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaCategorias/listarCategorias">Listar Categorias</a></li>
-                <li><a href="../../../../public/index.php">Voltar</a></li>
+                <li><a href="../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
-        <div class="content" id="exibir-conteudo">
+        <div class="container content" id="exibir-conteudo">
 
         </div>
         <div id="notification" class="notification"></div>

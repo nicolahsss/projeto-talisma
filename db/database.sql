@@ -41,7 +41,7 @@ CREATE TABLE tbl_cores (
   codigo_barras VARCHAR(20) NOT NULL,
   codigo_hex VARCHAR(7) NOT NULL,
   produto_id INT NOT NULL,
-  FOREIGN KEY (produto_id) REFERENCES tbl_produtos (produto_id)
+  FOREIGN KEY (produto_id) REFERENCES tbl_produto(produto_id)
 )DEFAULT CHARSET=utf8mb4;
 
 
@@ -50,7 +50,7 @@ CREATE TABLE tbl_tamanhos (
   nome_tamanho VARCHAR(24) NOT NULL,
   codigo_barras VARCHAR(20) NOT NULL,
   produto_id INT NOT NULL,
-  FOREIGN KEY (produto_id) REFERENCES tbl_produtos (produto_id)
+  FOREIGN KEY (produto_id) REFERENCES tbl_produto(produto_id)
 )DEFAULT CHARSET=utf8mb4;
 
 
@@ -75,6 +75,9 @@ CREATE TABLE tbl_usuario (
   cep VARCHAR(10) NOT NULL,
   data_cadastro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 )DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO tbl_usuario (nome, sobrenome, tipo_cadastro, num_cpf, email, genero, senha, tipo, telefone, pais, nome_rua, num_casa, nome_bairro, cidade, estado, cep) 
+VALUES ('Matheus','Brandão','Pessoa Fisica','00000000000','mafe123silva@gmail.com','Homem','exagon10','ADMIN','993203891','Brasil','Rua 01','00','São Francisco','São Francisco','Rondonia','76935000');
 
 
 CREATE TABLE tbl_carrinho (

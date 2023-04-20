@@ -60,7 +60,7 @@
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaVendas/pagamentosPendentes">Pagamentos Pendentes</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaVendas/produtosMaisVendidos">Mais vendidos</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaVendas/movimentoPorCliente">Movimento por cliente</a></li>
-                <li><a href="../../../../public/index.php">Voltar</a></li>
+                <li><a href="../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
         <div class="content" id="exibir-conteudo">

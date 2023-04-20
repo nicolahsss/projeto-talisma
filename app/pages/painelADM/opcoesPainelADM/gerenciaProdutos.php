@@ -59,7 +59,7 @@
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaProdutos/editarProdutos">Editar Produtos</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaProdutos/deletarProdutos">Deletar Produtos</a></li>
                 <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaProdutos/cadastrarProdutos">Cadastrar Produtos</a></li>
-                <li><a href="../../../../public/index.php">Voltar</a></li>
+                <li><a href="../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
         <div class="content" id="exibir-conteudo">

@@ -59,7 +59,7 @@
                 <li><a href="#" data-ir="opcoesAvaliacoes/">Editar Promoções</a></li>
                 <li><a href="#" data-ir="opcoesAvaliacoes/">Deletar Promoções</a></li>
                 <li><a href="#" data-ir="opcoesAvaliacoes/">Criar Promoção</a></li>
-                <li><a href="../../../../public/index.php">Voltar</a></li>
+                <li><a href="../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
         <div class="content" id="exibir-conteudo">
