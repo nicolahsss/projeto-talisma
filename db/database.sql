@@ -8,6 +8,13 @@ CREATE TABLE tbl_categoria (
   imagem VARCHAR(110)
 )DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria01','categoria para produtos 01','adesivo.png');
+INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria02','categoria para produtos 02','adesivo.png');
+INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria03','categoria para produtos 03','adesivo.png');
+INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria04','categoria para produtos 04','adesivo.png');
+INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria05','categoria para produtos 05','adesivo.png');
+INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria06','categoria para produtos 06','adesivo.png');
+INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria07','categoria para produtos 07','adesivo.png');
 
 CREATE TABLE tbl_produto (
   produto_id INT AUTO_INCREMENT PRIMARY KEY,

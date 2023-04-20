@@ -11,89 +11,79 @@
 <body>
 <div class="container" style="background-color: #f3f3f3; padding: 1rem 20px">
 <h3>Cadastar Produtos</h3>
-    <form class="row">
+    <form class="row" action="../../../adm/validacoes/validarCadastroDeProduto/cadastrarProduto.php" method="post"  enctype="multipart/form-data">
       <div class="form-group col-md-3">
         <label for="nome">Nome do Produto</label>
-        <input type="text" class="form-control" id="nome" placeholder="Nome do produto">
+        <input type="text" class="form-control" id="nome" name="nomeproduto" placeholder="Nome do produto">
       </div>
 
       <div class="form-group col-md-3">
         <label for="preco-promocional">Codigo de barras</label>
-        <input type="number" class="form-control" id="preco-promocional" placeholder="Preço promocional do produto">
+        <input type="number" class="form-control" name="codigodebarras" id="preco-promocional" placeholder="Preço promocional do produto">
       </div>
 
       <div class="form-group col-md-3">
         <label for="quantidade">Quantidade em estoque</label>
-        <input type="number" class="form-control" id="quantidade" placeholder="Quantidade em estoque do produto">
+        <input type="number" class="form-control" name="quantidadeemestoque" id="quantidade" placeholder="Quantidade em estoque do produto">
       </div>
 
       <div class="form-group col-md-3">
         <label for="categoria">Categoria</label>
-        <select class="form-control" id="categoria">
+        <select class="form-control" name="categoriadoproduto" id="categoria">
           <option value="Selecione">Selecione</option>
-          <option value="Selecione">Categoria01</option>
-          <option value="Selecione">Categoria02</option>
-          <option value="Selecione">Categoria03</option>
-          <option value="Selecione">Categoria04</option>
+          <?php while($exibeDadosCategorias = mysqli_fetch_assoc($exibeDadosCategoria)) { ?>
+            <option value="<?php echo $exibeDadosCategorias['categoria_id'];?>"><?php echo $exibeDadosCategorias['nome'];?></option>
+          <?php } ?>
         </select>
       </div>
 
+
       <div class="form-group col-md-12">
         <label for="descricao">Descrição</label>
-        <textarea class="form-control" id="descricao" rows="3"></textarea>
+        <textarea class="form-control" name="descricaodoproduto" id="descricao" rows="3"></textarea>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
             <label for="imagem">Imagem Principal</label>
-            <input type="file" class="form-control-file" id="imagem">
+            <input type="file" name="imagemprincipaldoproduto" class="form-control-file" id="imagem">
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
             <label for="imagem">Imagem Dois</label>
-            <input type="file" class="form-control-file" id="imagem2">
+            <input type="file" name="imagemdoisproduto" class="form-control-file" id="imagem2">
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
             <label for="imagem">Imagem Três</label>
-            <input type="file" class="form-control-file" id="imagem3">
+            <input type="file" name="imagemtresproduto" class="form-control-file" id="imagem3">
         </div>
       </div>
 
       <div class="col-md-3">
         <div class="form-group">
             <label for="imagem">Imagem Quatro</label>
-            <input type="file" class="form-control-file" id="imagem4">
+            <input type="file" name="imagemquatroproduto" class="form-control-file" id="imagem4">
         </div>
       </div>
 
 
-      <div class="form-group col-md-3" id="cores">
-        <label for="cor">Cores</label>
-        <select class="form-control" id="cores">
-          <option value="Selecione">Selecione</option>
-          <option value="Selecione">Categoria01</option>
-          <option value="Selecione">Categoria02</option>
-          <option value="Selecione">Categoria03</option>
-          <option value="Selecione">Categoria04</option>
-        </select>
-      </div>
 
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="custo">Custo</label>
-        <input type="number" class="form-control" id="custo" placeholder="Custo do produto">
+        <input type="number" name="custoproduto" class="form-control" id="custo" placeholder="Custo do produto">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="preco">Preço</label>
-        <input type="number" class="form-control" id="preco" placeholder="Preço do produto">
+        <input type="number" name="precoproduto" class="form-control" id="preco" placeholder="Preço do produto">
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <label for="preco-promocional">Preço promocional</label>
-        <input type="number" class="form-control" id="preco-promocional" placeholder="Preço promocional do produto">
+        <input type="number" name="precopromocional" class="form-control" id="preco-promocional" placeholder="Preço promocional do produto">
       </div>
         <div class="col-md-12" style="display: flex; justify-content:right;">
             <button class="btn btn-info">Cadastrar</button>

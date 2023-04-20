@@ -3,6 +3,7 @@ session_start();
 
   require '../adm/config/conexao.php';
   require '../adm/manipulacoes/manipularDadosUser/consultaDadosUser.php';
+  require '../adm/consultasSQL/consultaDadosProdutos.php';
 
 ?>
 <!DOCTYPE html>
@@ -660,7 +661,7 @@ session_start();
                   alt=""
                 />
                 <div class="product-action">
-                  <a class="btn btn-outline-dark btn-square" href=""
+                  <a class="btn btn-outline-dark btn-square" href="../adm/manipulacoes/manipularCarrinho/inserirNoCarrinho.php#idProd=<?php echo $exibeDadosDosProdutos['produto_id'];?>"
                     ><i class="fa fa-shopping-cart"></i
                   ></a>
                   <a class="btn btn-outline-dark btn-square" href=""
