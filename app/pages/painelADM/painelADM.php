@@ -1,6 +1,7 @@
 <?php
 session_start();
     require '../../../adm/config/conexao.php';
+    require '../../../adm/consultasSQL/consultaDadosCategorias.php';
 
 ?>
 <!DOCTYPE html>

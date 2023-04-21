@@ -1,3 +1,7 @@
+<?php
+require '../../../../../adm/config/conexao.php';
+require '../../../../../adm/consultasSQL/consultaDadosCategorias.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +35,7 @@
         <label for="categoria">Categoria</label>
         <select class="form-control" name="categoriadoproduto" id="categoria">
           <option value="Selecione">Selecione</option>
-          <?php while($exibeDadosCategorias = mysqli_fetch_assoc($exibeDadosCategoria)) { ?>
+          <?php while($exibeDadosCategorias = $condultaDadosDasCategorias->fetch(PDO::FETCH_ASSOC)) { ?>
             <option value="<?php echo $exibeDadosCategorias['categoria_id'];?>"><?php echo $exibeDadosCategorias['nome'];?></option>
           <?php } ?>
         </select>
@@ -71,6 +75,16 @@
         </div>
       </div>
 
+      <div class="col-md-12">
+        <label for="cores">Cores Disponíveis:</label><br>
+        <input type="checkbox" id="cores" name="cores[Vermelho]" value="">Vermelho<br>
+        <input type="checkbox" id="cores" name="cores[Azul]" value="">Azul<br>
+        <input type="checkbox" id="cores" name="cores[Verde]" value="">Verde<br>
+        <input type="checkbox" id="cores" name="cores[Roxo]" value="">Roxo<br>
+        <input type="checkbox" id="cores" name="cores[Amarelo]" value="">Amarelo<br>
+        <input type="checkbox" id="cores" name="cores[Branco]" value="">Branco<br>
+        <input type="checkbox" id="cores" name="cores[Laranja]" value="">Laranja<br>
+      </div>
 
 
       <div class="form-group col-md-4">
