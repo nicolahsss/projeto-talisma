@@ -55,10 +55,10 @@
             </div>
 
             <ul id="ulmenu">
-                <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaAvaliacoes/listarAvaliacoes">Listar Promoções</a></li>
-                <li><a href="#" data-ir="opcoesAvaliacoes/">Editar Promoções</a></li>
-                <li><a href="#" data-ir="opcoesAvaliacoes/">Deletar Promoções</a></li>
-                <li><a href="#" data-ir="opcoesAvaliacoes/">Criar Promoção</a></li>
+                <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPromocoes/listarPromocoes">Listar Promoções</a></li>
+                <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPromocoes/editarPromocoes">Editar Promoções</a></li>
+                <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPromocoes/deletarPromocoes">Deletar Promoções</a></li>
+                <li><a href="#" data-ir="opcoesPainelADM/opcoesGerenciaPromocoes/cadastrarPromocoes">Criar Promoção</a></li>
                 <li><a href="../../../public/index.php">Voltar</a></li>
             </ul>
         </div>
