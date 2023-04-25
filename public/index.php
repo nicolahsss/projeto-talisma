@@ -4,7 +4,8 @@ session_start();
   require '../adm/config/conexao.php';
   require '../adm/manipulacoes/manipularDadosUser/consultaDadosUser.php';
   require '../adm/consultasSQL/consultaDadosProdutos.php';
-
+  require '../adm/manipulacoes/manipularCarrinho/contadorCarrinho.php';
+  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -133,14 +134,14 @@ session_start();
                 >0</span
               >
             </a>
-            <a href="../app/pages/carrinho/cart.php" class="btn px-0 ml-2">
-              <i class="fas fa-shopping-cart text-dark"></i>
-              <span
-                class="badge text-dark border border-dark rounded-circle"
-                style="padding-bottom: 2px"
-                >0</span
-              >
-            </a>
+              <a href="../app/pages/carrinho/cart.php" class="btn px-0 ml-2">
+                <i class="fas fa-shopping-cart text-dark"></i>
+                <span
+                  class="badge text-dark border border-dark rounded-circle"
+                  style="padding-bottom: 2px"
+                  >0</span
+                >
+              </a>
           </div>
         </div>
       </div>
@@ -259,7 +260,7 @@ session_start();
             >
               <div class="navbar-nav mr-auto py-0">
                 <a href="../public/index.php" class="nav-item nav-link active">Home</a>
-                <a href="../app/pages/produtos/shop.php" class="nav-item nav-link">Shop</a>
+                <a href="../app/pages/produtos/shop.php" class="nav-item nav-link">Produtos</a>
                 <a href="../app/pages/detalhes/detail.php" class="nav-item nav-link">Shop Detail</a>
                 <div class="nav-item dropdown">
                   <a
@@ -273,7 +274,7 @@ session_start();
                     <a href="../app/pages/checkout/checkout.php" class="dropdown-item">Checkout</a>
                   </div>
                 </div>
-                <a href="../app/pages/contato/contact.php" class="nav-item nav-link">Contact</a>
+                <a href="../app/pages/contato/contact.php" class="nav-item nav-link">Contato</a>
               </div>
               <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                 <a href="" class="btn px-0">
@@ -286,10 +287,8 @@ session_start();
                 </a>
                 <a href="../app/pages/carrinho/cart.php" class="btn px-0 ml-3">
                   <i class="fas fa-shopping-cart text-primary"></i>
-                  <span
-                    class="badge text-secondary border border-secondary rounded-circle"
-                    style="padding-bottom: 2px"
-                    >0</span
+                  <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px" id="qntcontador"
+                    ><?php if(isset($_SESSION['ID'])){ echo $quantidade_produtos;} else { echo '0';}?></span
                   >
                 </a>
               </div>
@@ -665,7 +664,7 @@ session_start();
                   alt=""
                 />
                 <div class="product-action">
-                  <?php if($exibeDadosDosProdutos['quantidade'] >= 1) { ?>
+                  <?php if(isset($_SESSION['ID'])){ if($exibeDadosDosProdutos['quantidade'] >= 1) { ?>
                   <button type="submit" class="btn btn-outline-dark btn-square"
                     ><i class="fa fa-shopping-cart"></i
                   ></button>
@@ -673,6 +672,10 @@ session_start();
                     <button type="submit" disabled class="btn btn-outline-dark btn-square"
                     ><i class="fa fa-shopping-cart"></i
                     ></button>
+                  <?php }}else{  ?>
+                    <a href="../app/pages/login/loginUser.php" class="btn btn-outline-dark btn-square"
+                    ><i class="fa fa-shopping-cart"></i
+                  ></a>
                   <?php } ?>
                   <a class="btn btn-outline-dark btn-square" href=""
                     ><i class="far fa-heart"></i
@@ -1166,6 +1169,10 @@ session_start();
               // Exibe a mensagem de sucesso
               $('#mensagem').removeClass('d-none');
               
+              // Atualiza a quantidade de produtos no carrinho
+              $('#qntcontador').html(response);
+              console.log(response);
+
               // Esconde a mensagem após 3 segundos
               setTimeout(function() {
                 $('#mensagem').addClass('d-none');
@@ -1177,6 +1184,13 @@ session_start();
           });
         });
       });
+
+
+/*       let valorOriginal = $("#qntcontador").text();
+      let converterParaNumero = Number(valorOriginal);
+      $("#qntcontador").text(converterParaNumero + 1); */
+
+
     </script>
   </body>
 </html>
