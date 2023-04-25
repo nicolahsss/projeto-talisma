@@ -8,6 +8,8 @@ CREATE TABLE tbl_categoria (
   imagem VARCHAR(110)
 )DEFAULT CHARSET=utf8mb4;
 
+/* Categorias de teste */
+
 INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria01','categoria para produtos 01','adesivo.png');
 INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria02','categoria para produtos 02','adesivo.png');
 INSERT INTO tbl_categoria (nome, descricao, imagem) VALUES ('categoria03','categoria para produtos 03','adesivo.png');
@@ -32,6 +34,21 @@ CREATE TABLE tbl_produto (
   categoria_id INT NOT NULL,
   FOREIGN KEY (categoria_id) REFERENCES tbl_categoria(categoria_id) ON DELETE CASCADE
 )DEFAULT CHARSET=utf8mb4;
+
+/* Produtos de teste */
+
+INSERT INTO tbl_produto (nome, descricao, custo, preco, preco_promocional, quantidade, imagem, tem_cores, tem_tamanhos, categoria_id) 
+VALUES ('Produto 01 teste','Introduzindo o SmartWatch 3000 - o relógio inteligente mais avançado do mercado! Com uma tela OLED de alta definição e sensível ao toque, este relógio não só exibe as horas, mas também monitora sua saúde e fitness, controla sua música, recebe notificações de mensagens e muito mais! Com seu design elegante e moderno, o SmartWatch 3000 é a escolha perfeita para os entusiastas da tecnologia que desejam adicionar um toque futurista ao seu estilo de vida diário.','80','189,99','165,99','15','balcao.jpg','Não','Não','2');
+INSERT INTO tbl_produto (nome, descricao, custo, preco, preco_promocional, quantidade, imagem, tem_cores, tem_tamanhos, categoria_id)
+VALUES ('Produto 01 teste','Introduzindo o SmartWatch 3000 - o relógio inteligente mais avançado do mercado! Com uma tela OLED de alta definição e sensível ao toque, este relógio não só exibe as horas, mas também monitora sua saúde e fitness, controla sua música, recebe notificações de mensagens e muito mais! Com seu design elegante e moderno, o SmartWatch 3000 é a escolha perfeita para os entusiastas da tecnologia que desejam adicionar um toque futurista ao seu estilo de vida diário.','39,99','110,99','99,99','8','adesivo.png','Não','Não','1');
+INSERT INTO tbl_produto (nome, descricao, custo, preco, preco_promocional, quantidade, imagem, tem_cores, tem_tamanhos, categoria_id)
+VALUES ('Produto 01 teste','Introduzindo o SmartWatch 3000 - o relógio inteligente mais avançado do mercado! Com uma tela OLED de alta definição e sensível ao toque, este relógio não só exibe as horas, mas também monitora sua saúde e fitness, controla sua música, recebe notificações de mensagens e muito mais! Com seu design elegante e moderno, o SmartWatch 3000 é a escolha perfeita para os entusiastas da tecnologia que desejam adicionar um toque futurista ao seu estilo de vida diário.','49,99','92,99','85','30','aplicador.jpg','Não','Não','3');
+INSERT INTO tbl_produto (nome, descricao, custo, preco, preco_promocional, quantidade, imagem, tem_cores, tem_tamanhos, categoria_id)
+VALUES ('Produto 01 teste','Introduzindo o SmartWatch 3000 - o relógio inteligente mais avançado do mercado! Com uma tela OLED de alta definição e sensível ao toque, este relógio não só exibe as horas, mas também monitora sua saúde e fitness, controla sua música, recebe notificações de mensagens e muito mais! Com seu design elegante e moderno, o SmartWatch 3000 é a escolha perfeita para os entusiastas da tecnologia que desejam adicionar um toque futurista ao seu estilo de vida diário.','99,99','179,99','165,99','15','cadeira.jpg','Não','Não','3');
+INSERT INTO tbl_produto (nome, descricao, custo, preco, preco_promocional, quantidade, imagem, tem_cores, tem_tamanhos, categoria_id)
+VALUES ('Produto 01 teste','Introduzindo o SmartWatch 3000 - o relógio inteligente mais avançado do mercado! Com uma tela OLED de alta definição e sensível ao toque, este relógio não só exibe as horas, mas também monitora sua saúde e fitness, controla sua música, recebe notificações de mensagens e muito mais! Com seu design elegante e moderno, o SmartWatch 3000 é a escolha perfeita para os entusiastas da tecnologia que desejam adicionar um toque futurista ao seu estilo de vida diário.','32,99','85','70','5','caixa.jpg','Não','Não','1');
+INSERT INTO tbl_produto (nome, descricao, custo, preco, preco_promocional, quantidade, imagem, tem_cores, tem_tamanhos, categoria_id)
+VALUES ('Produto 01 teste','Introduzindo o SmartWatch 3000 - o relógio inteligente mais avançado do mercado! Com uma tela OLED de alta definição e sensível ao toque, este relógio não só exibe as horas, mas também monitora sua saúde e fitness, controla sua música, recebe notificações de mensagens e muito mais! Com seu design elegante e moderno, o SmartWatch 3000 é a escolha perfeita para os entusiastas da tecnologia que desejam adicionar um toque futurista ao seu estilo de vida diário.','556,99','999,99','850','3','armario-aj-rorato.jpg','Não','Não','2');
 
 
 CREATE TABLE tbl_produto_imagem (
