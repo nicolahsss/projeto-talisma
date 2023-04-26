@@ -161,17 +161,18 @@ session_start();
           </a>
         </div>
         <div class="col-lg-4 col-6 text-left">
-          <form action="">
+          <form action="../app/pages/produtos/busca.php" id="form-pesquisa" method="post">
             <div class="input-group">
               <input
                 type="text"
                 class="form-control"
-                placeholder="Search for products"
+                placeholder="Procurar produtos"
+                name="txtpesquisa"
               />
               <div class="input-group-append">
-                <span class="input-group-text bg-transparent text-primary">
+                <button type="submit" class="input-group-text bg-transparent text-primary">
                   <i class="fa fa-search"></i>
-                </span>
+                </button>
               </div>
             </div>
           </form>
@@ -298,6 +299,7 @@ session_start();
       </div>
     </div>
     <!-- Navbar End -->
+<div class="conteudo-pesquisa" id="exibir-resultado">
 
     <!-- Carousel Start -->
     <div class="container-fluid mb-3">
@@ -1127,6 +1129,8 @@ session_start();
       </div>
     </div>
     <!-- Vendor End -->
+    
+</div>
 
     <!-- Container para a mensagem de sucesso -->
     <div id="mensagem" class="alert alert-success d-none text-center" role="alert" style="width:450px; position:fixed; top:0; right:0 !important; background-color:yellowgreen; color:azure; font-weight:bold;">
@@ -1184,13 +1188,7 @@ session_start();
           });
         });
       });
-
-
-/*       let valorOriginal = $("#qntcontador").text();
-      let converterParaNumero = Number(valorOriginal);
-      $("#qntcontador").text(converterParaNumero + 1); */
-
-
     </script>
+
   </body>
 </html>
