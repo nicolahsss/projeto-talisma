@@ -5,7 +5,9 @@ require '../../../adm/manipulacoes/manipularDadosUser/consultaDadosUser.php';
 require '../../../adm/consultasSQL/consultaDadosProdutos.php';
 require '../../../adm/manipulacoes/manipularCarrinho/contadorCarrinho.php';
 
-$id_user = $_SESSION['ID'];
+if(isset($_SESSION['ID'])){
+  $id_user = $_SESSION['ID'];
+}
 
 $pesquisa = $_POST['txtpesquisa'];
 
@@ -71,10 +73,10 @@ $result = $cn->query($buscarProduto);
                 My Account
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                <a href="../app/pages/login/loginUser.php">
+                <a href="../../../app/pages/login/loginUser.php">
                   <button class="dropdown-item" type="button">Sign in</button>
                 </a>
-                <a href="../app/pages/cadastroUser/cadastroUser.php">
+                <a href="../../../app/pages/cadastroUser/cadastroUser.php">
                   <button class="dropdown-item" type="button">Sign up</button>
                 </a>
               </div>
@@ -92,22 +94,22 @@ $result = $cn->query($buscarProduto);
               </button>
               <?php if($exibeDadosUserLogado['tipo'] === 'COMUM') { ?>
               <div class="dropdown-menu dropdown-menu-right">
-                <a href="../app/pages/perfil/perfilUsuario.php">
+                <a href="../../../app/pages/perfil/perfilUsuario.php">
                   <button class="dropdown-item" type="button">Minha conta</button>
                 </a>
-                <a href="../adm/validacoes/validarLogin/sair.php">
+                <a href="../../../adm/validacoes/validarLogin/sair.php">
                   <button class="dropdown-item" type="button">Sair</button>
                 </a>
               </div>
               <?php } else { ?>
                 <div class="dropdown-menu dropdown-menu-right">
-                <a href="../app/pages/painelADM/painelADM.php">
+                <a href="../../../app/pages/painelADM/painelADM.php">
                   <button class="dropdown-item" type="button">Painel ADM</button>
                 </a>
-                <a href="../app/pages/perfil/perfilUsuario.php">
+                <a href="../../../app/pages/perfil/perfilUsuario.php">
                   <button class="dropdown-item" type="button">Minha conta</button>
                 </a>
-                <a href="../adm/validacoes/validarLogin/sair.php">
+                <a href="../../../adm/validacoes/validarLogin/sair.php">
                   <button class="dropdown-item" type="button">Sair</button>
                 </a>
               </div>
@@ -141,7 +143,7 @@ $result = $cn->query($buscarProduto);
                 >0</span
               >
             </a>
-              <a href="../app/pages/carrinho/cart.php" class="btn px-0 ml-2">
+              <a href="../../../app/pages/carrinho/cart.php" class="btn px-0 ml-2">
                 <i class="fas fa-shopping-cart text-dark"></i>
                 <span
                   class="badge text-dark border border-dark rounded-circle"
@@ -156,7 +158,7 @@ $result = $cn->query($buscarProduto);
         class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex"
       >
         <div class="col-lg-4">
-          <a href="../public/index.php" class="text-decoration-none">
+          <a href="../../../public/index.php" class="text-decoration-none">
             <span class="h1 text-uppercase text-dark px-2 ml-n1"
               ><img src="../public/assets/img/logo.png" alt="" style="width: 100px"
             /></span>
@@ -244,9 +246,9 @@ $result = $cn->query($buscarProduto);
           <nav
             class="navbar navbar-expand-lg bg-blue navbar-dark py-3 py-lg-0 px-0"
           >
-            <a href="../public/index.php" class="text-decoration-none d-block d-lg-none">
+            <a href="../../../public/index.php" class="text-decoration-none d-block d-lg-none">
               <span class="h1 text-uppercase text-dark bg-light px-2"
-                ><img src="../public/assets/img/logo.png" alt="" style="width: 100px"
+                ><img src="../../../public/assets/img/logo.png" alt="" style="width: 100px"
               /></span>
               <span
                 class="h1 text-uppercase text-light bg-primary px-2 ml-n1"
@@ -267,9 +269,9 @@ $result = $cn->query($buscarProduto);
               id="navbarCollapse"
             >
               <div class="navbar-nav mr-auto py-0">
-                <a href="../public/index.php" class="nav-item nav-link active">Home</a>
-                <a href="../app/pages/produtos/shop.php" class="nav-item nav-link">Produtos</a>
-                <a href="../app/pages/detalhes/detail.php" class="nav-item nav-link">Shop Detail</a>
+                <a href="../../../public/index.php" class="nav-item nav-link active">Home</a>
+                <a href="../../../app/pages/produtos/shop.php" class="nav-item nav-link">Produtos</a>
+                <a href="../../../app/pages/detalhes/detail.php" class="nav-item nav-link">Shop Detail</a>
                 <div class="nav-item dropdown">
                   <a
                     href="#"
@@ -278,11 +280,11 @@ $result = $cn->query($buscarProduto);
                     >Pages <i class="fa fa-angle-down mt-1"></i
                   ></a>
                   <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                    <a href="../app/pages/carrinho/cart.php" class="dropdown-item">Shopping Cart</a>
-                    <a href="../app/pages/checkout/checkout.php" class="dropdown-item">Checkout</a>
+                    <a href="../../../app/pages/carrinho/cart.php" class="dropdown-item">Shopping Cart</a>
+                    <a href="../../../app/pages/checkout/checkout.php" class="dropdown-item">Checkout</a>
                   </div>
                 </div>
-                <a href="../app/pages/contato/contact.php" class="nav-item nav-link">Contato</a>
+                <a href="../../../app/pages/contato/contact.php" class="nav-item nav-link">Contato</a>
               </div>
               <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                 <a href="" class="btn px-0">
@@ -293,7 +295,7 @@ $result = $cn->query($buscarProduto);
                     >0</span
                   >
                 </a>
-                <a href="../app/pages/carrinho/cart.php" class="btn px-0 ml-3">
+                <a href="../../../app/pages/carrinho/cart.php" class="btn px-0 ml-3">
                   <i class="fas fa-shopping-cart text-primary"></i>
                   <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px" id="qntcontador"
                     ><?php if(isset($_SESSION['ID'])){ echo $quantidade_produtos;} else { echo '0';}?></span
@@ -337,7 +339,7 @@ $result = $cn->query($buscarProduto);
                         ><i class="fa fa-shopping-cart"></i
                         ></button>
                       <?php }}else{  ?>
-                        <a href="../app/pages/login/loginUser.php" class="btn btn-outline-dark btn-square"
+                        <a href="../../../app/pages/login/loginUser.php" class="btn btn-outline-dark btn-square"
                         ><i class="fa fa-shopping-cart"></i
                       ></a>
                       <?php } ?>
