@@ -2,7 +2,12 @@
 session_start();
 require '../../../adm/config/conexao.php';
 require '../../../adm/manipulacoes/manipularDadosUser/consultaDadosUser.php';
-require '../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
+require '../../../adm/consultasSQL/consultaProdutosNoCarrinho.php'; 
+
+if(isset($_SESSION['ID'])){
+$usuario_id = (int)$exibeDadosUserLogado['usuario_id'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -309,6 +314,8 @@ require '../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
 
     <!-- Cart Start -->
     <div class="container-fluid" id="produtosCarrinho">
+      <form action="../checkout/checkout.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="idusuario" value="<?php echo $usuario_id;?>">
         <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
                 <table class="table table-light table-borderless table-hover text-center mb-0">
@@ -328,6 +335,10 @@ require '../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
                       foreach($dados_carrinho as $produto): ?>
                         <tr>
                             <td class="align-middle"><img src="../../../public/assets/img/<?php echo $produto['imagem'];?>" alt="" style="width: 50px;"> <?php echo $produto['nome'];?></td>
+                            <input type="text" name="nomeproduto[]" value="<?php echo $produto['nome'];?>" hidden>
+                            <input type="number" name="idproduto[]" value="<?php echo $produto['produto_id'];?>" hidden>
+                            <input type="number" name="quantidadeproduto[]" value="<?php echo $produto['quantidade'];?>" hidden>
+                            <input type="hidden" name="precoproduto[]" value="<?php echo number_format($produto['preco'],2,',','.');?>">
                             <td class="align-middle">R$ <?php echo number_format($produto['preco'],2,',','.');?></td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -366,6 +377,7 @@ require '../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
                             <h6>R$ <?php echo number_format($subTotal,2,',','.');?></h6>
+                            <input type="hidden" name="subtotalpedido" value="<?php echo number_format($subTotal,2,',','.');?>">
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Frete</h6>
@@ -376,12 +388,14 @@ require '../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
                             <h5>R$ <?php $totalCarrinho = $subTotal + 10; echo number_format($totalCarrinho,2,',','.');?></h5>
+                            <input type="hidden" name="totalpedido" value="<?php echo number_format($totalCarrinho,2,',','.');?>">
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Finalizar</button>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
     <!-- Cart End -->
 
