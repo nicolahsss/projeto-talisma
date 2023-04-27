@@ -1,9 +1,22 @@
+<?php
+session_start();
+require '../../../adm/config/conexao.php';
+require '../../../adm/manipulacoes/manipularDadosUser/consultaDadosUser.php';
+require '../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
+
+$dadosDosProdutos = array_merge($_POST);
+/* echo '<pre>';
+var_dump($dadosDosProdutos);
+echo '</pre>';
+exit(); */
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
+    <title>Talisma Carrinho</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
@@ -22,153 +35,266 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../../../public/assets/css/style.css" rel="stylesheet">
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        <div class="row bg-secondary py-1 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="">About</a>
-                    <a class="text-body mr-3" href="">Contact</a>
-                    <a class="text-body mr-3" href="">Help</a>
-                    <a class="text-body mr-3" href="">FAQs</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">Sign in</button>
-                            <button class="dropdown-item" type="button">Sign up</button>
-                        </div>
-                    </div>
-                    <div class="btn-group mx-2">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">EUR</button>
-                            <button class="dropdown-item" type="button">GBP</button>
-                            <button class="dropdown-item" type="button">CAD</button>
-                        </div>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">FR</button>
-                            <button class="dropdown-item" type="button">AR</button>
-                            <button class="dropdown-item" type="button">RU</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-inline-flex align-items-center d-block d-lg-none">
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-heart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                    <a href="../carrinho/cart.php" class="btn px-0 ml-2">
-                        <i class="fas fa-shopping-cart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                </div>
-            </div>
+      <div class="row bg-secondary py-1 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+          <div class="d-inline-flex align-items-center h-100">
+            <a class="text-body mr-3" href="">About</a>
+            <a class="text-body mr-3" href="">Contact</a>
+            <a class="text-body mr-3" href="">Help</a>
+            <a class="text-body mr-3" href="">FAQs</a>
+          </div>
         </div>
-        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-            <div class="col-lg-4">
-                <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+        <div class="col-lg-6 text-center text-lg-right">
+          <div class="d-inline-flex align-items-center">
+            <?php if(!isset($_SESSION['ID'])) { ?>
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-sm btn-light dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                My Account
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a href="../app/pages/login/loginUser.php">
+                  <button class="dropdown-item" type="button">Sign in</button>
                 </a>
+                <a href="../app/pages/cadastroUser/cadastroUser.php">
+                  <button class="dropdown-item" type="button">Sign up</button>
+                </a>
+              </div>
             </div>
-            <div class="col-lg-4 col-6 text-left">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                </form>
+            <?php } else { ?>
+              <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-sm btn-light dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                <?php 
+                echo $exibeDadosUserLogado['nome']; 
+                ?>
+              </button>
+              <?php if($exibeDadosUserLogado['tipo'] === 'COMUM') { ?>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a href="../app/pages/perfil/perfilUsuario.php">
+                  <button class="dropdown-item" type="button">Minha conta</button>
+                </a>
+                <a href="../adm/validacoes/validarLogin/sair.php">
+                  <button class="dropdown-item" type="button">Sair</button>
+                </a>
+              </div>
+              <?php } else { ?>
+                <div class="dropdown-menu dropdown-menu-right">
+                <a href="../app/pages/painelADM/painelADM.php">
+                  <button class="dropdown-item" type="button">Painel ADM</button>
+                </a>
+                <a href="../app/pages/perfil/perfilUsuario.php">
+                  <button class="dropdown-item" type="button">Minha conta</button>
+                </a>
+                <a href="../adm/validacoes/validarLogin/sair.php">
+                  <button class="dropdown-item" type="button">Sair</button>
+                </a>
+              </div>
+              <?php } ?>
             </div>
-            <div class="col-lg-4 col-6 text-right">
-                <p class="m-0">Customer Service</p>
-                <h5 class="m-0">+012 345 6789</h5>
+
+
+                <?php } ?>
+
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-sm btn-light dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                EN
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button">FR</button>
+                <button class="dropdown-item" type="button">AR</button>
+                <button class="dropdown-item" type="button">RU</button>
+              </div>
             </div>
+          </div>
+          <div class="d-inline-flex align-items-center d-block d-lg-none">
+            <a href="" class="btn px-0 ml-2">
+              <i class="fas fa-heart text-dark"></i>
+              <span
+                class="badge text-dark border border-dark rounded-circle"
+                style="padding-bottom: 2px"
+                >0</span
+              >
+            </a>
+            <a href="../app/pages/carrinho/cart.php" class="btn px-0 ml-2">
+              <i class="fas fa-shopping-cart text-dark"></i>
+              <span
+                class="badge text-dark border border-dark rounded-circle"
+                style="padding-bottom: 2px"
+                >0</span
+              >
+            </a>
+          </div>
         </div>
+      </div>
+      <div
+        class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex"
+      >
+        <div class="col-lg-4">
+          <a href="../public/index.php" class="text-decoration-none">
+            <span class="h1 text-uppercase text-dark px-2 ml-n1"
+              ><img src="../../../public/assets/img/logo.png" alt="" style="width: 100px"
+            /></span>
+            <span
+              class="h1 text-uppercase text-primaryy px-2"
+              style="color: blue !important"
+              >TALISMÃ</span
+            >
+          </a>
+        </div>
+        <div class="col-lg-4 col-6 text-left">
+          <form action="">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search for products"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text bg-transparent text-primary">
+                  <i class="fa fa-search"></i>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-4 col-6 text-right">
+          <p class="m-0">Customer Service</p>
+          <h5 class="m-0">+012 345 6789</h5>
+        </div>
+      </div>
     </div>
     <!-- Topbar End -->
 
-
     <!-- Navbar Start -->
-    <div class="container-fluid bg-dark mb-30">
-        <div class="row px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                    <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categorias</h6>
-                    <i class="fa fa-angle-down text-dark"></i>
-                </a>
-                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                    <div class="navbar-nav w-100">
-                        <div class="nav-item dropdown dropright">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                <a href="" class="dropdown-item">Men's Dresses</a>
-                                <a href="" class="dropdown-item">Women's Dresses</a>
-                                <a href="" class="dropdown-item">Baby's Dresses</a>
-                            </div>
-                        </div>
-                        <a href="" class="nav-item nav-link">Shirts</a>
-                        <a href="" class="nav-item nav-link">Jeans</a>
-                        <a href="" class="nav-item nav-link">Swimwear</a>
-                        <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                        <a href="" class="nav-item nav-link">Shoes</a>
-                    </div>
-                </nav>
+    <div class="container-fluid bg-blue mb-30">
+      <div class="row px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+          <a
+            class="btn d-flex align-items-center justify-content-between bg-primary w-100"
+            data-toggle="collapse"
+            href="#navbar-vertical"
+            style="height: 65px; padding: 0 30px"
+          >
+            <h6 class="text-dark m-0">
+              <i class="fa fa-bars mr-2"></i>Categorias
+            </h6>
+            <i class="fa fa-angle-down text-dark"></i>
+          </a>
+          <nav
+            class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
+            id="navbar-vertical"
+            style="width: calc(100% - 30px); z-index: 999"
+          >
+            <div class="navbar-nav w-100">
+              <div class="nav-item dropdown dropright">
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  >Dresses <i class="fa fa-angle-right float-right mt-1"></i
+                ></a>
+                <div
+                  class="dropdown-menu position-absolute rounded-0 border-0 m-0"
+                >
+                  <a href="" class="dropdown-item">Men's Dresses</a>
+                  <a href="" class="dropdown-item">Women's Dresses</a>
+                  <a href="" class="dropdown-item">Baby's Dresses</a>
+                </div>
+              </div>
+              <a href="" class="nav-item nav-link">Shirts</a>
+              <a href="" class="nav-item nav-link">Jeans</a>
+              <a href="" class="nav-item nav-link">Swimwear</a>
+              <a href="" class="nav-item nav-link">Sleepwear</a>
+              <a href="" class="nav-item nav-link">Sportswear</a>
+              <a href="" class="nav-item nav-link">Jumpsuits</a>
+              <a href="" class="nav-item nav-link">Blazers</a>
+              <a href="" class="nav-item nav-link">Jackets</a>
+              <a href="" class="nav-item nav-link">Shoes</a>
             </div>
-            <div class="col-lg-9">
-                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                    <a href="../../../public/index.php" class="text-decoration-none d-block d-lg-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
-                    </a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="../../../public/index.php" class="nav-item nav-link">Home</a>
-                            <a href="../produtos/shop.php" class="nav-item nav-link">Shop</a>
-                            <a href="../detalhes/detail.php" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="../carrinho/cart.php" class="dropdown-item">Shopping Cart</a>
-                                    <a href="../checkout/checkout.php" class="dropdown-item active">Checkout</a>
-                                </div>
-                            </div>
-                            <a href="../contato/contact.php" class="nav-item nav-link">Contact</a>
-                        </div>
-                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="" class="btn px-0">
-                                <i class="fas fa-heart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
-                            <a href="../carrinho/cart.php" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+          </nav>
         </div>
+        <div class="col-lg-9">
+          <nav
+            class="navbar navbar-expand-lg bg-blue navbar-dark py-3 py-lg-0 px-0"
+          >
+            <a href="../public/index.php" class="text-decoration-none d-block d-lg-none">
+              <span class="h1 text-uppercase text-dark bg-light px-2"
+                ><img src="../public/assets/img/logo.png" alt="" style="width: 100px"
+              /></span>
+              <span
+                class="h1 text-uppercase text-light bg-primary px-2 ml-n1"
+                style="color: blue !important"
+                >TALISMÃ</span
+              >
+            </a>
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-between"
+              id="navbarCollapse"
+            >
+              <div class="navbar-nav mr-auto py-0">
+                <a href="../../../public/index.php" class="nav-item nav-link active">Home</a>
+                <a href="../app/pages/produtos/shop.php" class="nav-item nav-link">Produtos</a>
+                <div class="nav-item dropdown">
+                  <a
+                    href="#"
+                    class="nav-link dropdown-toggle"
+                    data-toggle="dropdown"
+                    >Pages <i class="fa fa-angle-down mt-1"></i
+                  ></a>
+                  <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                    <a href="../app/pages/carrinho/cart.php" class="dropdown-item">Carrinho</a>
+                  </div>
+                </div>
+                <a href="../app/pages/contato/contact.php" class="nav-item nav-link">Contato</a>
+              </div>
+              <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                <a href="" class="btn px-0">
+                  <i class="fas fa-heart text-primary"></i>
+                  <span
+                    class="badge text-secondary border border-secondary rounded-circle"
+                    style="padding-bottom: 2px"
+                    >0</span
+                  >
+                </a>
+                <a href="../app/pages/carrinho/cart.php" class="btn px-0 ml-3">
+                  <i class="fas fa-shopping-cart text-primary"></i>
+                  <span
+                    class="badge text-secondary border border-secondary rounded-circle"
+                    style="padding-bottom: 2px"
+                    >0</span
+                  >
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
     </div>
     <!-- Navbar End -->
 
@@ -179,8 +305,8 @@
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Checkout</span>
+                    <a class="breadcrumb-item text-dark" href="#">Carrinho</a>
+                    <span class="breadcrumb-item active">Pagamento</span>
                 </nav>
             </div>
         </div>
@@ -192,64 +318,64 @@
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-lg-8">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Endereço de entrega</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="John">
+                            <label>Primeiro nome</label>
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['nome'];?>">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
+                            <label>Sobrenome</label>
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['sobrenome'];?>">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="example@email.com">
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['email'];?>">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
+                            <label>Numero de telefone</label>
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['telefone'];?>">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Address Line 1</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
+                            <label>Rua</label>
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['nome_rua'];?>">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Address Line 2</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
+                            <label>Numero</label>
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['num_casa'];?>">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Country</label>
+                            <label>País</label>
                             <select class="custom-select">
-                                <option selected>United States</option>
+                                <option selected value="<?php echo $exibeDadosUserLogado['pais'];?>"><?php echo $exibeDadosUserLogado['pais'];?></option>
                                 <option>Afghanistan</option>
                                 <option>Albania</option>
                                 <option>Algeria</option>
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>City</label>
-                            <input class="form-control" type="text" placeholder="New York">
+                            <label>Cidade</label>
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['cidade'];?>">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>State</label>
-                            <input class="form-control" type="text" placeholder="New York">
+                            <label>Estado</label>
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['estado'];?>">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
+                            <label>CEP</label>
+                            <input class="form-control" type="text" value="<?php echo $exibeDadosUserLogado['cep'];?>">
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="newaccount">
-                                <label class="custom-control-label" for="newaccount">Create an account</label>
+                                <label class="custom-control-label" for="newaccount">Criar conta</label>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="shipto">
-                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
+                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Entregar em outro endereço?</label>
                             </div>
                         </div>
                     </div>
@@ -308,62 +434,69 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Total do pedido</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom">
-                        <h6 class="mb-3">Products</h6>
+                        <h6 class="mb-3">Produtos</h6>
+                        <?php foreach($dadosDosProdutos['nomeproduto'] as $key => $nomeProduto): ?>
                         <div class="d-flex justify-content-between">
-                            <p>Product Name 1</p>
-                            <p>R$150</p>
+                            <p><?php echo $nomeProduto;?></p>
+                            <p><?php echo $dadosDosProdutos['quantidadeproduto'][$key];?></p>
+                            <p><?php echo $dadosDosProdutos['precoproduto'][$key];?></p>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Product Name 2</p>
-                            <p>R$150</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Product Name 3</p>
-                            <p>R$150</p>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                     <div class="border-bottom pt-3 pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
-                            <h6>R$150</h6>
+                            <h6>R$ <?php echo $dadosDosProdutos['subtotalpedido'];?></h6>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">R$10</h6>
+                            <h6 class="font-weight-medium">Frete</h6>
+                            <h6 class="font-weight-medium">R$ 10,00</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>R$160</h5>
+                            <h5>R$ <?php echo $dadosDosProdutos['totalpedido'];?></h5>
                         </div>
                     </div>
                 </div>
                 <div class="mb-5">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Pagamento</span></h5>
                     <div class="bg-light p-30">
                         <div class="form-group">
                             <div class="custom-control custom-radio">
                                 <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Paypal</label>
+                                <label class="custom-control-label" for="paypal">Cartão de crédito</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
+                                <label class="custom-control-label" for="tocard">Dois cartões de crédito</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
+                                <label class="custom-control-label" for="paypal">Cartão de débito</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
                                 <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                                <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                <label class="custom-control-label" for="boleto">Boleto bancario</label>
                             </div>
                         </div>
                         <div class="form-group mb-4">
                             <div class="custom-control custom-radio">
                                 <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                <label class="custom-control-label" for="banktransfer">Pix</label>
                             </div>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                        <button class="btn btn-block btn-info font-weight-bold py-3">Pagar!</button>
                     </div>
                 </div>
             </div>
