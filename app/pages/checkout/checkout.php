@@ -10,6 +10,7 @@ var_dump($dadosDosProdutos);
 echo '</pre>';
 exit(); */
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -465,39 +466,41 @@ exit(); */
                 </div>
                 <div class="mb-5">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Pagamento</span></h5>
-                    <div class="bg-light p-30">
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Cartão de crédito</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="tocard">Dois cartões de crédito</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Cartão de débito</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                                <label class="custom-control-label" for="boleto">Boleto bancario</label>
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                <label class="custom-control-label" for="banktransfer">Pix</label>
-                            </div>
-                        </div>
-                        <button class="btn btn-block btn-info font-weight-bold py-3">Pagar!</button>
-                    </div>
+                    <form action="">
+                      <div class="bg-light p-30">
+                          <div class="form-group">
+                              <div class="custom-control custom-radio">
+                                  <input type="radio" class="custom-control-input" name="payment" id="creditcard">
+                                  <label class="custom-control-label" for="creditcard">Cartão de crédito</label>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="custom-control custom-radio">
+                                  <input type="radio" class="custom-control-input" name="payment" id="tocreditcard">
+                                  <label class="custom-control-label" for="tocreditcard">Dois cartões de crédito</label>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="custom-control custom-radio">
+                                  <input type="radio" class="custom-control-input" name="payment" id="debitcard">
+                                  <label class="custom-control-label" for="debitcard">Cartão de débito</label>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="custom-control custom-radio">
+                                  <input type="radio" class="custom-control-input" name="payment" id="boletobancario">
+                                  <label class="custom-control-label" for="boleto">Boleto bancario</label>
+                              </div>
+                          </div>
+                          <div class="form-group mb-4">
+                              <div class="custom-control custom-radio">
+                                  <input type="radio" class="custom-control-input" name="payment" id="pixtransfer">
+                                  <label class="custom-control-label" for="pix">Pix</label>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn btn-block btn-info font-weight-bold py-3">Pagar!</button>
+                      </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -584,15 +587,15 @@ exit(); */
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../../../public/assets/lib/easing/easing.min.js"></script>
+    <script src="../../../public/assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script src="../../../public/assets/mail/jqBootstrapValidation.min.js"></script>
+    <script src="../../../public/assets/mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="../../../public/assets/js/main.js"></script>
 </body>
 
 </html>
