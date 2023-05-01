@@ -1,16 +1,10 @@
 <?php
 session_start();
 require '../../../adm/config/conexao.php';
+require_once '../../../vendor/autoload.php';
 require '../../../adm/manipulacoes/manipularDadosUser/consultaDadosUser.php';
 require '../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
-
-$dadosDosProdutos = array_merge($_POST);
-/* echo '<pre>';
-var_dump($dadosDosProdutos);
-echo '</pre>';
-exit(); */
-
-
+require '../../../adm/consultasSQL/consultaDadosPedido.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -373,84 +367,33 @@ exit(); */
                                 <label class="custom-control-label" for="newaccount">Criar conta</label>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="shipto">
-                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Entregar em outro endereço?</label>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
-                <div class="collapse mb-5" id="shipping-address">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Shipping Address</span></h5>
-                    <div class="bg-light p-30">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>First Name</label>
-                                <input class="form-control" type="text" placeholder="John">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Last Name</label>
-                                <input class="form-control" type="text" placeholder="Doe">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" placeholder="example@email.com">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="+123 456 789">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Address Line 1</label>
-                                <input class="form-control" type="text" placeholder="123 Street">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Address Line 2</label>
-                                <input class="form-control" type="text" placeholder="123 Street">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Country</label>
-                                <select class="custom-select">
-                                    <option selected>United States</option>
-                                    <option>Afghanistan</option>
-                                    <option>Albania</option>
-                                    <option>Algeria</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>City</label>
-                                <input class="form-control" type="text" placeholder="New York">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>State</label>
-                                <input class="form-control" type="text" placeholder="New York">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>ZIP Code</label>
-                                <input class="form-control" type="text" placeholder="123">
-                            </div>
-                        </div>
-                    </div>
+
+                <!-- Exibir forma de pagamento aqui dentro -->
+                <div class="mb-5" id="exibe-forma-pagamento">
+
                 </div>
+
             </div>
             <div class="col-lg-4">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Total do pedido</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom">
                         <h6 class="mb-3">Produtos</h6>
-                        <?php foreach($dadosDosProdutos['nomeproduto'] as $key => $nomeProduto): ?>
+                        <?php $subTotal = 0; foreach($dados_carrinho as $dadosProduto): ?>
                         <div class="d-flex justify-content-between">
-                            <p><?php echo $nomeProduto;?></p>
-                            <p><?php echo $dadosDosProdutos['quantidadeproduto'][$key];?></p>
-                            <p><?php echo $dadosDosProdutos['precoproduto'][$key];?></p>
+                            <p><?php echo $dadosProduto['nome'];?></p>
+                            <p><?php echo $dadosProduto['quantidade'];?></p>
+                            <p><?php echo $dadosProduto['preco'];?></p>
                         </div>
-                        <?php endforeach; ?>
+                        <?php  $totalProduto = $dadosProduto['quantidade'] * $dadosProduto['preco']; $subTotal += $totalProduto;  endforeach; ?>
                     </div>
                     <div class="border-bottom pt-3 pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
-                            <h6>R$ <?php echo $dadosDosProdutos['subtotalpedido'];?></h6>
+                            <h6>R$ <?php echo number_format($subTotal,2,',','.');?></h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Frete</h6>
@@ -460,49 +403,50 @@ exit(); */
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>R$ <?php echo $dadosDosProdutos['totalpedido'];?></h5>
+                            <h5>R$ <?php $totalPedido = $subTotal + 10; echo $totalPedido;?></h5>
                         </div>
                     </div>
                 </div>
                 <div class="mb-5">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Pagamento</span></h5>
-                    <form action="">
+                    <div id="opcoesPagamento">
                       <div class="bg-light p-30">
                           <div class="form-group">
                               <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" name="payment" id="creditcard">
-                                  <label class="custom-control-label" for="creditcard">Cartão de crédito</label>
+                                  <input type="radio" class="" data-ir="opcoesCheckout/pagamentoCartaoCredito" name="payment" id="creditcard">
+                                  <label class="" for="creditcard">Cartão de crédito</label>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" name="payment" id="tocreditcard">
-                                  <label class="custom-control-label" for="tocreditcard">Dois cartões de crédito</label>
+                                  <input type="radio" class="" data-ir="opcoesCheckout/pagamentoComDoisCartoes" name="payment" id="tocreditcard">
+                                  <label class="" for="tocreditcard">Dois cartões de crédito</label>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" name="payment" id="debitcard">
-                                  <label class="custom-control-label" for="debitcard">Cartão de débito</label>
+                                  <input type="radio" class="" data-ir="opcoesCheckout/pagamentoCartaoDebito" name="payment" id="debitcard">
+                                  <label class="" for="debitcard">Cartão de débito</label>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" name="payment" id="boletobancario">
-                                  <label class="custom-control-label" for="boleto">Boleto bancario</label>
+                                  <input type="radio" class="" data-ir="opcoesCheckout/pagamentoBoleto" name="payment" id="boletobancario">
+                                  <label class="" for="boleto">Boleto bancario</label>
                               </div>
                           </div>
                           <div class="form-group mb-4">
                               <div class="custom-control custom-radio">
-                                  <input type="radio" class="custom-control-input" name="payment" id="pixtransfer">
-                                  <label class="custom-control-label" for="pix">Pix</label>
+                                  <input type="radio" class="" data-ir="opcoesCheckout/pagamentoPix" name="payment" id="pixtransfer">
+                                  <label class="" for="pix">Pix</label>
                               </div>
                           </div>
-                          <button type="submit" class="btn btn-block btn-info font-weight-bold py-3">Pagar!</button>
+                          <!-- <button type="submit" class="btn btn-block btn-info font-weight-bold py-3">Pagar!</button> -->
                       </div>
-                    </form>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Checkout End -->
@@ -596,6 +540,24 @@ exit(); */
 
     <!-- Template Javascript -->
     <script src="../../../public/assets/js/main.js"></script>
+
+
+    <script>
+        $(function () {
+            $("#opcoesPagamento input").click(function (e) {
+            let oi = $(this).data('ir');
+
+            $.ajax({
+                url: oi + '.php',
+                success: function (html) {
+                $("#exibe-forma-pagamento").html(html);
+                console.log(html);
+                }
+            });
+            });
+        })
+    </script>
+    
 </body>
 
 </html>
