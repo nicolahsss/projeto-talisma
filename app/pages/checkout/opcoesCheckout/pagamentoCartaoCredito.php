@@ -8,7 +8,10 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Pagar com Cartão de Credito</span></h5>
 <div class="bg-light p-30">
 
-
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<script>
+      const mp = new MercadoPago("TEST-e95dc122-b8bc-40dd-8419-ae8f8cb39e40");
+</script>
 <style>
     #form-checkout {
       display: flex;
@@ -59,15 +62,10 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
 
 </div>
 
-<script src="https://sdk.mercadopago.com/js/v2"></script>
 
 
 <script>
-    const mp = new MercadoPago("TEST-e95dc122-b8bc-40dd-8419-ae8f8cb39e40");
-</script>
 
-<script>
-    
     const cardForm = mp.cardForm({
       amount: "100.5",
       iframe: true,
@@ -128,6 +126,16 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
             identificationNumber,
             identificationType,
           } = cardForm.getCardFormData();
+                    console.log({
+            payment_method_id,
+            issuer_id,
+            email,
+            amount,
+            token,
+            installments,
+            identificationNumber,
+            identificationType,
+          });
 
           fetch("../../../adm/validacoes/pagamento/finalizaPagamentoCartaoCredito.php", {
             method: "POST",
@@ -154,7 +162,7 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
             if (!response.ok) {
             throw new Error('Falha ao processar pagamento');
             }
-            console.log('O pagamento esta sendo processado.');
+            console.log(token);
 
         })
         .catch(error => {

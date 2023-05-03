@@ -1,5 +1,9 @@
 <?php
 session_start();
+?>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+<?php
 require_once __DIR__ . "/../../../vendor/autoload.php";
 require '../../config/conexao.php';
 require '../../consultasSQL/consultaProdutosNoCarrinho.php';
@@ -9,7 +13,7 @@ require '../../manipulacoes/manipularDadosUser/consultaDadosUser.php';
 MercadoPago\SDK::setAccessToken('TEST-6819797163859486-042622-0bb4b98962c0524f7c5f20053166a16b-669050670');
 
 $payment = new MercadoPago\Payment();
-   $payment->transaction_amount = (float)$_POST['transactionAmount'];
+   $payment->transaction_amount = (float)$_POST['transaction_amount'];
    $payment->token = $_POST['token'];
    $payment->description = $_POST['description'];
    $payment->installments = (int)$_POST['installments'];
@@ -29,7 +33,6 @@ $payment = new MercadoPago\Payment();
 
    // Get the payment ID
 $payment_id = $payment->id;
-
  
    $response = array(
        'status' => $payment->status,
@@ -42,7 +45,7 @@ $payment_id = $payment->id;
    );
   
    $log = date('Y-m-d H:i:s') . ' - ' . json_encode($response) . PHP_EOL;
-file_put_contents('log.txt', $log, FILE_APPEND);
+   file_put_contents('log.txt', $log, FILE_APPEND);
 
 /* // Recebe os dados do formulário via POST
 $email = $_POST['email'];

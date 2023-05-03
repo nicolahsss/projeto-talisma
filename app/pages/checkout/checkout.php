@@ -551,7 +551,7 @@ require '../../../adm/consultasSQL/consultaDadosPedido.php';
                 url: oi + '.php',
                 success: function (html) {
                 $("#exibe-forma-pagamento").html(html);
-                console.log(html);
+                
                 }
             });
             });
