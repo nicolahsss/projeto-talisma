@@ -314,7 +314,7 @@ $usuario_id = (int)$exibeDadosUserLogado['usuario_id'];
 
     <!-- Cart Start -->
     <div class="container-fluid" id="produtosCarrinho">
-      <form action="../checkout/checkout.php" method="post" enctype="multipart/form-data">
+      <form action="../checkout/inserirPedido.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="idusuario" value="<?php echo $usuario_id;?>">
         <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">

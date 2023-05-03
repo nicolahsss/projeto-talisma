@@ -32,6 +32,7 @@ require '../../../adm/consultasSQL/consultaDadosPedido.php';
     <link href="../../../public/assets/css/style.css" rel="stylesheet">
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
+
 </head>
 
 <body>
@@ -522,7 +523,6 @@ require '../../../adm/consultasSQL/consultaDadosPedido.php';
         </div>
     </div>
     <!-- Footer End -->
-
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>

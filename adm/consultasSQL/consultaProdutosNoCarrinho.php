@@ -12,6 +12,8 @@ $consulta_carrinho = $cn->query("SELECT * FROM tbl_carrinho WHERE usuario_id = '
 // Array para armazenar os dados dos produtos e quantidades
 $dados_carrinho = array();
 
+$subtotal = 0;
+
 while($produto_carrinho = $consulta_carrinho->fetch(PDO::FETCH_ASSOC)){
     // Obtém o id do produto adicionado ao carrinho
     $id_produto = (int) $produto_carrinho['produto_id'];
@@ -26,10 +28,12 @@ while($produto_carrinho = $consulta_carrinho->fetch(PDO::FETCH_ASSOC)){
         'imagem' => $dados_produto['imagem'],
         'nome' => $dados_produto['nome'],
         'preco' => $dados_produto['preco_promocional'],
-        'quantidade' => $produto_carrinho['quantidade']
+        'quantidade' => $produto_carrinho['quantidade'],
     );
 
-    
+    $subtotal += $dados_produto['preco_promocional'] * $produto_carrinho['quantidade'];
 }
+
+$valor_total = $subtotal + 10;
 
 ?>
