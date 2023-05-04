@@ -1,0 +1,2 @@
+2023-05-04 05:49:06 - {}
+2023-05-04 05:49:32 - {"status":null,"status_detail":null,"id":null,"token":"b013737086eb12e98bab6491fff9735c","description":"Descri\u00e7\u00e3o do produto","installments":1,"identification":{"type":"CPF","number":"03600717243"}}
