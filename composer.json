@@ -1,6 +1,9 @@
 {
     "require": {
         "mercadopago/dx-php": "2.5.3",
-        "guzzlehttp/guzzle": "^7.5"
+        "guzzlehttp/guzzle": "^7.5",
+        "slim/slim": "*",
+        "slim/http": "*",
+        "slim/psr7": "*"
     }
 }
