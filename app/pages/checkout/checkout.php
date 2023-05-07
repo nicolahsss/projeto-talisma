@@ -30,6 +30,7 @@ require '../../../adm/consultasSQL/consultaDadosPedido.php';
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../../../public/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="opcoesCheckout/pagamentoCartaoCredito.css">
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 
