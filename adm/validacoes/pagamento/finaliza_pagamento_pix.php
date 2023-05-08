@@ -45,16 +45,10 @@ $estado = $exibeDadosUserLogado['estado'];
  $payment->save();
 
 
- $response = array(
-    'status' => $payment->status,
-    'status_detail' => $payment->status_detail,
-    'id' => $payment->id,
-    'description' =>$payment->description,
-    'identification' =>$payment->payer->identification
+ $qr_code_base64 = $payment->point_of_interaction->transaction_data->qr_code_base64;
+   
 
-);
-
-$log = date('Y-m-d H:i:s') . ' - ' . json_encode($response) . PHP_EOL;
+$log = date('Y-m-d H:i:s') . ' - ' . json_encode($qr_code_base64) . PHP_EOL;
 file_put_contents('log.txt', $log, FILE_APPEND);
 
 
