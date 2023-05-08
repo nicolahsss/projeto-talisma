@@ -1,5 +1,6 @@
 <?php
 session_start();
+$dados_pix = json_decode(file_get_contents("php://input"));
 ?>
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 
@@ -9,12 +10,12 @@ require '../../config/conexao.php';
 require '../../consultasSQL/consultaProdutosNoCarrinho.php';
 require '../../manipulacoes/manipularDadosUser/consultaDadosUser.php';
 
-$amout = $_POST['total'];
-$email = $_POST['email'];
-$nome = $_POST['payerFirstName'];
-$sobrenome = $_POST['payerLastName'];
-$tipo_documento = $_POST['identificationType'];
-$num_documento = $_POST['identificationNumber'];
+$amout = $dados_pix->total;
+$email = $dados_pix->email;
+$nome = $dados_pix->first_name;
+$sobrenome = $dados_pix->last_name;
+$tipo_documento = $dados_pix->identification->type;
+$num_documento = $dados_pix->identification->number;
 
 $cep = $exibeDadosUserLogado['cep'];
 $rua = $exibeDadosUserLogado['nome_rua'];
@@ -44,11 +45,13 @@ $estado = $exibeDadosUserLogado['estado'];
 
  $payment->save();
 
-
- $qr_code_base64 = $payment->point_of_interaction->transaction_data->qr_code_base64;
+ $resposta = array(
+  'qr_code_base64' => $payment->point_of_interaction->transaction_data->qr_code_base64,
+ );
    
+ echo json_encode($resposta);
 
-$log = date('Y-m-d H:i:s') . ' - ' . json_encode($qr_code_base64) . PHP_EOL;
+$log = date('Y-m-d H:i:s') . ' - ' . json_encode($resposta) . PHP_EOL;
 file_put_contents('log.txt', $log, FILE_APPEND);
 
 

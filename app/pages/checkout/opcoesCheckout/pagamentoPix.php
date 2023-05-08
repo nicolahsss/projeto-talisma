@@ -105,10 +105,12 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
     })
       .then((response) => response.json())
       .then((data) => {
-        qrCodeContainer.innerHTML = `<img src="data:image/png;base64,${data.qr_code_base64}">`;
+        
+        qrCodeContainer.innerHTML = '<img src="data:image/png;base64,${data.qr_code_base64}">';
       })
       .catch((error) => {
-        console.error(error);
+/*         console.error(error);
+        console.log('Erro no bloco catch:', error); */
       });
   });
 
