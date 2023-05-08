@@ -28,8 +28,8 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
     }
     
   </style>
-  <form id="form-checkout" action="../../../adm/validacoes/pagamento/finaliza_pagamento_pix.php" method="post">
-    <input type="hidden" value="394.97" name="total">
+  <form id="form-checkout">
+    <input type="hidden" value="394.97" name="total" id="form-checkout__total">
     <div>
       <div>
         <label for="payerFirstName">Nome</label>
@@ -58,14 +58,16 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
         <input type="hidden" name="transactionAmount" id="transactionAmount" value="100">
         <input type="hidden" name="description" id="description" value="Nome do Produto">
         <br>
-        <button type="submit" id="form-checkout__submit">Pagar</button>
+        <button type="submit" id="botao-pagamento">Pagar</button>
       </div>
     </div>
   </form>
 
 
 
+<div id="exibe_qr_code">
 
+</div>
 
 
 </div>
@@ -73,6 +75,43 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
 
 
 <script>
+  const form = document.querySelector('#form-checkout');
+  const button = document.querySelector('#botao-pagamento');
+  const qrCodeContainer = document.querySelector('#exibe_qr_code');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const total = document.querySelector('#form-checkout__total').value;
+    const email = document.querySelector('#form-checkout__email').value;
+    const nome = document.querySelector('#form-checkout__payerFirstName').value;
+    const sobrenome = document.querySelector('#form-checkout__payerLastName').value;
+    const tipo_documento = document.querySelector('#form-checkout__identificationType').value;
+    const num_documento = document.querySelector('#form-checkout__identificationNumber').value;
+
+    fetch('../../../adm/validacoes/pagamento/finaliza_pagamento_pix.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        total,
+        email,
+        nome,
+        sobrenome,
+        tipo_documento,
+        num_documento,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        qrCodeContainer.innerHTML = `<img src="data:image/png;base64,${data.qr_code_base64}">`;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
     (async function getIdentificationTypes() {
       try {
         const identificationTypes = await mp.getIdentificationTypes();
