@@ -65,9 +65,9 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
 
 
 
-<div id="exibe_qr_code">
+  <div id="exibe_qr_code">
 
-</div>
+  </div>
 
 
 </div>
@@ -103,10 +103,10 @@ require '../../../../adm/consultasSQL/consultaProdutosNoCarrinho.php';
         num_documento,
       }),
     })
-      .then((response) => response.json())
       .then((data) => {
         
         qrCodeContainer.innerHTML = '<img src="data:image/png;base64,${data.qr_code_base64}">';
+        console.log(qrCodeContainer);
       })
       .catch((error) => {
 /*         console.error(error);
