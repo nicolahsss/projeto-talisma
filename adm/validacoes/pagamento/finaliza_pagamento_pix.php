@@ -46,13 +46,12 @@ $estado = $exibeDadosUserLogado['estado'];
  $payment->save();
 
  $resposta = array(
-  'qr_code_base64' => $payment->point_of_interaction->transaction_data->qr_code_base64,
+  'qr_code_base64' => $payment->point_of_interaction->transaction_data,
  );
-   
- echo json_encode($resposta);
 
-$log = date('Y-m-d H:i:s') . ' - ' . json_encode($resposta) . PHP_EOL;
+$log = date('Y-m-d H:i:s') . ' - ' . json_encode($payment->point_of_interaction->transaction_data) . PHP_EOL;
 file_put_contents('log.txt', $log, FILE_APPEND);
 
-
+header('Content-Type: application/json');
+echo json_encode($resposta);
 ?>
